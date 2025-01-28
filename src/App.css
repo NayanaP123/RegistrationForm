@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+img {
+    width: 100%; /* Make it responsive to container width */
+    height: auto; /* Maintain aspect ratio */
+    /* color: rgb(255, 229, 101); */
+}
+
+@media (max-width: 768px) {
+    img {
+        max-width: 100%; /* Make sure it doesn't overflow */
+        height: 250px; /* Set a consistent height for small devices */
+        object-fit: cover; /* Ensures the image looks nice even when cropped */
+    }
+}
