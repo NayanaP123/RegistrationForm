@@ -199,7 +199,7 @@ function Login({ setdata }) {
                             <Form.Control onChange={(e) => handlePassword(e.target.value)} type="password" />
                             {invalidPassword && (
                                 <p style={{ fontSize: '15px', color: 'red' }}>
-                                    <em>Password must contain at least 8 characters with at least one alphabet, special character, and number</em>
+                                    <em>Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character</em>
                                 </p>
                             )}
                         </FloatingLabel>
