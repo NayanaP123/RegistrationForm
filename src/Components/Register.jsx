@@ -99,7 +99,7 @@ function Login({ setdata }) {
 
     const handleSubmit = () => {
         if (invalidPhoneNumber) {
-            toast.error("Phone number must be exactly 10 digits!");
+            toast.warning("Phone number must be exactly 10 digits!");
             return; // Stop execution
         }
     
@@ -128,7 +128,7 @@ function Login({ setdata }) {
     
 
     return (
-        <div style={{ backgroundColor: 'beige', height: '138vh' }}>
+        <div style={{ backgroundColor: '#E0FFCC', height: '138vh' }}>
             <h1 style={{ textAlign: 'center' }}>REGISTRATION FORM</h1>
           
 
@@ -222,7 +222,7 @@ function Login({ setdata }) {
                         </FloatingLabel>
 
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Button onClick={handleSubmit} variant="primary">
+                            <Button style={{width:'500px'}} onClick={handleSubmit} variant="primary">
                                 Register
                             </Button>
                         </div>
