@@ -32,8 +32,10 @@ function Login({ setdata }) {
     const [invalidPassword, setInvalidPassword] = useState(false);
     const [invalidConfirm, setInvalidConfirm] = useState(true);
 
+    const [check, setCheck] = useState(true);
+
     const nameRegex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
-    const phoneNumberRegex = /^[7|8|9][0-9]{9}$/;
+    const phoneNumberRegex = /^\d{10}$/
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
 
     const navigate = useNavigate();
@@ -57,7 +59,7 @@ function Login({ setdata }) {
     };
 
     const handlePhoneNumber = (phonenumber) => {
-        if (phoneNumberRegex.test(phonenumber)) {
+        if (phoneNumberRegex.test(phonenumber) ) {
             setForm({ ...form, phoneNumber: phonenumber });
             setInvalidPhoneNumber(false);
         } else {
@@ -78,6 +80,7 @@ function Login({ setdata }) {
         if (form.password === confirm) {
             setForm({ ...form, confirmPassword: confirm });
             setInvalidConfirm(false);
+            setCheck(true)
         } else {
             setInvalidConfirm(true);
         }
@@ -95,25 +98,34 @@ function Login({ setdata }) {
   
 
     const handleSubmit = () => {
+        if (invalidPhoneNumber) {
+            toast.error("Phone number must be exactly 10 digits!");
+            return; // Stop execution
+        }
+    
+        if (form.password !== form.confirmPassword) {
+            setCheck(false);
+            return;
+        }
+    
         if (
             form.username &&
             form.email &&
             form.dob &&
             form.phoneNumber &&
             form.address &&
-            form.gender && // Ensure gender is selected
+            form.gender &&
             form.password &&
             form.confirmPassword
         ) {
             setdata(form);
             navigate('/home');
-            // alert("Registered successfully");
-            toast.success("Registered successfully")
+            toast.success("Registered successfully");
         } else {
-            // alert("Enter all details correctly");
-            toast.error("Enter all details correctly !")
+            toast.error("Enter all details correctly!");
         }
     };
+    
 
     return (
         <div style={{ backgroundColor: 'beige', height: '138vh' }}>
@@ -196,9 +208,17 @@ function Login({ setdata }) {
                             <Form.Control onChange={(e) => handleConfirm(e.target.value)} type="password" />
                             {!invalidConfirm && (
                                 <p style={{ fontSize: '15px', color: 'green' }}>
-                                    <em>Password matched</em>
+                                    <em><i class="fa-solid fa-check" style={{color:'green'}}></i> Password matched</em>
                                 </p>
                             )}
+
+{!check && (
+                                <p style={{ fontSize: '15px', color: 'red' }}>
+                                    <em><i class="fa-solid fa-x" style={{color:'red'}}></i> Password not matched</em>
+                                </p>
+                            )}
+
+                            
                         </FloatingLabel>
 
                         <div style={{ display: 'flex', justifyContent: 'center' }}>

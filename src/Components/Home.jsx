@@ -34,6 +34,10 @@ function Home({data}) {
      
       </Card.Body>
     </Card>
+
+
+    <br />
+    
     </div>
     <div className="col-md-4 col-sm-12"></div>
       </div>
